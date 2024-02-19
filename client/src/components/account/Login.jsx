@@ -28,7 +28,7 @@ const Image = styled('img')`
  // Adding padding to the image
 
 const Wrapper = styled(Box)` 
-  padding: 20px 20px; 
+  padding: 30px 30px; 
   display: flex; 
   flex-direction: column; 
   align-items: center; 
@@ -80,7 +80,6 @@ const LoginButton = styled(Button)(({ theme, isClicked }) => ({ // Styling the L
   },
   [theme.breakpoints.down('sm')]: {}, // Adding breakpoint styles
 }));
-
 const Label = styled('span')` 
   color: black; 
   font-weight: bold; 
