@@ -109,6 +109,15 @@ const BoldWhiteText = styled('span')`
 // Setting text color to white
 // Setting font weight to bold
 // Setting text alignment to center
+const signupInitialValues ={
+  name: '',
+  username: '',
+  password: '',
+  gender: '',
+  age: '',
+  mobile: ''
+}
+
 
 const Login = () => { // Creating the Login component
   const imageURL = 'https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png'; // Image URL
@@ -116,6 +125,7 @@ const Login = () => { // Creating the Login component
   const [isSignUpClicked, setSignUpClicked] = useState(false); // State for sign-up button click
   const [isLoginClicked, setLoginClicked] = useState(true); // State for login button click
   const [isUsernameFocused, setIsUsernameFocused] = useState(false); // State for focusing on username field
+  const[signup, setSignup] =useState(signupInitialValues);
 
   const handleFocus = () => { // Function to handle input focus
     setIsUsernameFocused(true); // Set isUsernameFocused state to true
@@ -134,6 +144,10 @@ const Login = () => { // Creating the Login component
     setSignUpClicked(false); // Set sign-up click state to false
     setLoginClicked(true); // Set login click state to true
   };
+
+  const onInputChange =(e) =>{
+  setSignup({ ...signup ,[e.target.name] : e.target.value });
+  }
 
   return (
     <Component> 
@@ -249,6 +263,8 @@ const Login = () => { // Creating the Login component
                 {/* // Rendering a label */}
                 <StyledTextField // Rendering the StyledTextField component
                   variant="standard"
+                  onChange={(e) => onInputChange(e)}
+                  name='name'
                   placeholder="Your Name"
                   InputLabelProps={{
                     style: { display: 'none' }, // Hide label when TextField is focused
@@ -270,6 +286,8 @@ const Login = () => { // Creating the Login component
                 <StyledTextField // Rendering the StyledTextField component
                   variant="standard"
                   placeholder="Your UserName"
+                  onChange={(e) => onInputChange(e)}
+                  name='username'
                   InputLabelProps={{
                     style: { display: 'none' }, // Hide label when TextField is focused
                   }}
@@ -290,6 +308,8 @@ const Login = () => { // Creating the Login component
                 <StyledTextField // Rendering the StyledTextField component
                   variant="standard"
                   placeholder="Your Password"
+                  onChange={(e) => onInputChange(e)}
+                  name='password'
                   InputLabelProps={{
                     style: { display: 'none' }, // Hide label when TextField is focused
                   }}
@@ -310,6 +330,8 @@ const Login = () => { // Creating the Login component
                 <StyledTextField // Rendering the StyledTextField component
                   variant="standard"
                   placeholder="Your Gender"
+                  onChange={(e) => onInputChange(e)}
+                  name='gender'
                   InputLabelProps={{
                     style: { display: 'none' }, // Hide label when TextField is focused
                   }}
@@ -330,6 +352,8 @@ const Login = () => { // Creating the Login component
                 <StyledTextField // Rendering the StyledTextField component
                   variant="standard"
                   placeholder="Your Age"
+                  onChange={(e) => onInputChange(e)}
+                  name='age'
                   InputLabelProps={{
                     style: { display: 'none' }, // Hide label when TextField is focused
                   }}
@@ -350,6 +374,8 @@ const Login = () => { // Creating the Login component
                 <StyledTextField // Rendering the StyledTextField component
                   variant="standard"
                   placeholder="Your Mobile.No"
+                  onChange={(e) => onInputChange(e)}
+                  name='mobil.no'
                   InputLabelProps={{
                     style: { display: 'none' }, // Hide label when TextField is focused
                   }}
