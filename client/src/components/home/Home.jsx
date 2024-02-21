@@ -1,10 +1,14 @@
 
 //component
 import Banner from "../banner/Banner";
+import Categories from "./Categories";
 
 const Home =() =>{
     return(
-       <Banner/>
+        <>
+          <Banner/>
+          <Categories/>
+        </>
     )
 }
 
