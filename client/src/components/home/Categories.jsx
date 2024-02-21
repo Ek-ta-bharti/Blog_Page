@@ -6,13 +6,6 @@ const StyledTable = styled(Table)`
     border: 10px solid rgba(224, 224, 224, 1);
 `;
 
-const StyledButton = styled(Button)`
-    margin: 20px;
-    width: 85%;
-    background: #6495ED;
-    color: #fff;
-`;
-
 const CenteredTableCell = styled(TableCell)`
     text-align: center;
 `;
@@ -38,7 +31,6 @@ const Categories = () => {
                     ))}
                 </TableBody>
             </StyledTable>
-            <StyledButton>create</StyledButton>
         </>
     );
 };

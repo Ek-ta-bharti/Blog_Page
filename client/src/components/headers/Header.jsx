@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
-import lines from './lines'; // Importing lines from the external file
+import lines from '../../constants/lines'; // Importing lines from the external file
 
 const Header = () => {
   const [currentLine, setCurrentLine] = useState(0);
