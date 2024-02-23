@@ -9,29 +9,29 @@ const Container = styled(Box)`
 const StyledControl = styled(FormControl)`
   margin-top: 10px;
   display: flex;
-  flex-direction: column; /* Changed to column */
-  width: 100%; /* Ensuring the form takes full width */
-  justify-content: space-between; /* Pushing items to opposite ends */
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
 `;
 
 const InputTextField = styled(InputBase)`
   flex: 1;
   margin: 10px 30px;
   font-size: 25px;
-  color: ${(props) => (props.isBlack ? 'white' : 'black')}; /* Alternate text color */
-  background-color: ${(props) => (props.isBlack ? 'black' : 'white')}; /* Alternate background color */
+  color: ${(props) => (props.isBlack ? 'white' : 'black')};
+  background-color: ${(props) => (props.isBlack ? 'black' : 'white')};
   text-align: left;
   max-width: 300px;
   border-radius: 5px;
   box-shadow: ${(props) =>
-    props.isBlack ? '0 0 10px white' : '0 0 10px black'}; /* Conditional box-shadow */
+    props.isBlack ? '0 0 10px white' : '0 0 10px black'};
   display: flex;
-  align-items: center; /* Center vertically */
-  padding: 0 10px; /* Adjust padding */
+  align-items: center;
+  padding: 0 10px;
   &::placeholder {
-    color: ${(props) => (props.isBlack ? 'white' : 'black')}; /* Placeholder color */
-    opacity: 0.5; /* Adjust opacity if needed */
-    text-align: center; /* Center placeholder text */
+    color: ${(props) => (props.isBlack ? 'white' : 'black')};
+    opacity: 0.5;
+    text-align: center;
   }
 `;
 
@@ -58,7 +58,7 @@ const PublishButton = styled(Button)`
   height: auto;
   padding: 8px 16px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-center;
 `;
 
 const initialPost = {
@@ -76,17 +76,13 @@ const initialPost = {
 
 const CreatePost = () => {
   const [post, setPost] = useState(initialPost);
+  const isSmallScreen = useMediaQuery('(max-width:600px)'); // Example breakpoint
 
-  // Handler for description change
   const handleDescriptionChange = (e) => {
     let newValue = e.target.value;
-
     newValue = newValue.replace(/\bsex\b/gi, 's*x');
     newValue = newValue.replace(/\bbetichod\b/gi, 'beti***d');
-
     newValue = newValue.replace(/\d/g, '');
-
-    // Update the state
     setPost({ ...post, description: newValue });
   };
 
@@ -104,9 +100,7 @@ const CreatePost = () => {
     const end = new Date(endDate);
     const diffTime = Math.abs(end - start);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    // Calculate years, months, days here
-    // Update the state with duration
-    setPost({ ...post, duration: `${diffDays} days` }); // Change this to show years, months, days
+    setPost({ ...post, duration: `${diffDays} days` });
   };
 
   return (
@@ -129,17 +123,21 @@ const CreatePost = () => {
           onChange={(e) => setPost({ ...post, age: e.target.value })}
           isBlack={true}
         />
-        <InputTextField
-          placeholder="Country"
-          value={post.country}
-          onChange={(e) => setPost({ ...post, country: e.target.value })}
-        />
-        <InputTextField
-          placeholder="State"
-          value={post.state}
-          onChange={(e) => setPost({ ...post, state: e.target.value })}
-          isBlack={true}
-        />
+        {!isSmallScreen && (
+          <>
+            <InputTextField
+              placeholder="Country"
+              value={post.country}
+              onChange={(e) => setPost({ ...post, country: e.target.value })}
+            />
+            <InputTextField
+              placeholder="State"
+              value={post.state}
+              onChange={(e) => setPost({ ...post, state: e.target.value })}
+              isBlack={true}
+            />
+          </>
+        )}
         <InputTextField
           type="date"
           placeholder="Start Date"
@@ -160,17 +158,17 @@ const CreatePost = () => {
           inputProps={{ maxLength: 300 }}
           isBlack={true}
         />
-        <PublishButton variant="contained">
-          Publish
-        </PublishButton>
       </StyledControl>
+      <p>{post.duration}</p>
       <Textarea
         minRows={5}
         placeholder="Tell your story..."
         value={post.description}
         onChange={handleDescriptionChange}
       />
-      <p>{post.duration}</p>
+      <PublishButton variant="contained">
+          Publish
+        </PublishButton>
     </Container>
   );
 };

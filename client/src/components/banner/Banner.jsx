@@ -27,8 +27,10 @@ const SubHeading = styled(Typography)`
 `;
 
 const Banner = () => {
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
     return (
-        <Image>
+        <Image sx={{ marginLeft: isSmallScreen ? 0 : leftMargin, marginRight: isSmallScreen ? 0 : leftMargin }}>
             <Heading> blog </Heading>
             <SubHeading> ektabharti </SubHeading>
         </Image>

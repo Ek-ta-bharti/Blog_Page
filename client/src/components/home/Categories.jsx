@@ -35,6 +35,8 @@ const WhiteTableCell = styled(TableCell)`
 `;
 
 const Categories = () => {
+    const isSmallScreen = useMediaQuery('(max-width:600px)');
+
     return (
         <>
             <StyledTable>
@@ -51,9 +53,11 @@ const Categories = () => {
                             <WhiteTableCell>
                                 {category.type}
                             </WhiteTableCell>
-                            <InputCell>
-                                <InputTextField placeholder="Search" />
-                            </InputCell>
+                            {isSmallScreen ? ( // Conditionally render based on screen size
+                                <InputCell>
+                                    <InputTextField placeholder="Search" />
+                                </InputCell>
+                            ) : null}
                         </TableRow>
                     ))}
                 </BlackTableBody>
