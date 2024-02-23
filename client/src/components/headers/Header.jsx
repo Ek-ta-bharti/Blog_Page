@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
-import lines from '../../constants/lines'; // Importing lines from the external file
+import lines from '../../constants/lines'; 
+import { useMediaQuery } from '@mui/material';
 
 const Header = () => {
   const [currentLine, setCurrentLine] = useState(0);
@@ -12,10 +13,10 @@ const Header = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const maxLength = Math.max(...lines.map(line => line.length)); // Find the length of the longest line
+  const maxLength = Math.max(...lines.map(line => line.length)); 
 
   return (
-    <div style={{ overflowX: 'hidden' }}> {/* Hide horizontal scrollbar */}
+    <div style={{ overflowX: 'hidden' }}> 
       <AppBar position="static" sx={{ backgroundColor: 'black' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '290px', marginRight: 'auto' }}>

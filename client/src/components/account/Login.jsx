@@ -2,6 +2,7 @@ import { useState } from 'react';
 // Importing the useState hook from React
 import { Box, TextField, Button, styled } from '@mui/material'; 
 // Importing Box, TextField, Button, and styled components from Material-UI
+import { useMediaQuery } from '@mui/material';
 
 const Component = styled(Box)` 
   width: 500px; 
