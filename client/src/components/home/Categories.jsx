@@ -1,6 +1,5 @@
 import { TableBody, TableCell, TableRow, Table, TableHead, styled, InputBase } from '@mui/material';
 import { categories } from '../../constants/data';
-import { useMediaQuery } from '@mui/material';
 
 const StyledTable = styled(Table)`
     border: 10px solid rgba(224, 224, 224, 1);
@@ -35,8 +34,6 @@ const WhiteTableCell = styled(TableCell)`
 `;
 
 const Categories = () => {
-    const isSmallScreen = useMediaQuery('(max-width:600px)');
-
     return (
         <>
             <StyledTable>
@@ -53,11 +50,9 @@ const Categories = () => {
                             <WhiteTableCell>
                                 {category.type}
                             </WhiteTableCell>
-                            {isSmallScreen ? ( // Conditionally render based on screen size
-                                <InputCell>
-                                    <InputTextField placeholder="Search" />
-                                </InputCell>
-                            ) : null}
+                            <InputCell>
+                                <InputTextField placeholder="Search" />
+                            </InputCell>
                         </TableRow>
                     ))}
                 </BlackTableBody>
