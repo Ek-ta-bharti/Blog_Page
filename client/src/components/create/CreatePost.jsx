@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, FormControl, styled, InputBase, Button, TextareaAutosize } from "@mui/material";
 import { useMediaQuery } from '@mui/material';
+import { sanitizeText } from './textSanitizer'; // Import the sanitizeText function
 
 const Container = styled(Box)`
   margin: 50px 100px;
@@ -34,7 +35,6 @@ const InputTextField = styled(InputBase)`
     text-align: center;
   }
 `;
-
 
 const MaxLengthInputTextField = styled(InputTextField)`
   max-width: 300px;
@@ -79,11 +79,8 @@ const CreatePost = () => {
   const isSmallScreen = useMediaQuery('(max-width:600px)'); // Example breakpoint
 
   const handleDescriptionChange = (e) => {
-    let newValue = e.target.value;
-    newValue = newValue.replace(/\bsex\b/gi, 's*x');
-    newValue = newValue.replace(/\bbetichod\b/gi, 'beti***d');
-    newValue = newValue.replace(/\d/g, '');
-    setPost({ ...post, description: newValue });
+    const sanitizedValue = sanitizeText(e.target.value);
+    setPost({ ...post, description: sanitizedValue });
   };
 
   const handleStartDateChange = (e) => {
@@ -91,16 +88,19 @@ const CreatePost = () => {
   };
 
   const handleEndDateChange = (e) => {
-    setPost({ ...post, endDate: e.target.value });
-    calculateDuration(post.startDate, e.target.value);
+    const newEndDate = e.target.value;
+    setPost({ ...post, endDate: newEndDate });
+    calculateDuration(post.startDate, newEndDate);
   };
 
   const calculateDuration = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const diffTime = Math.abs(end - start);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    setPost({ ...post, duration: `${diffDays} days` });
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      setPost({ ...post, duration: `${diffDays} days` });
+    }
   };
 
   return (
@@ -167,8 +167,8 @@ const CreatePost = () => {
         onChange={handleDescriptionChange}
       />
       <PublishButton variant="contained">
-          Publish
-        </PublishButton>
+        Publish
+      </PublishButton>
     </Container>
   );
 };
