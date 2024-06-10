@@ -38,7 +38,7 @@ import LoginHeader from './components/loginheader/LoginHeader';
 function App() {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       {/* <LoginHeader /> */}
       <div style={{ marginTop: 8 }}>
         <Routes>
